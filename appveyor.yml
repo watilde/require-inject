@@ -1,0 +1,25 @@
+environment:
+  matrix:
+    # LTS is our most important target
+    - nodejs_version: "4"
+    # next LTS and master is next most important
+    - nodejs_version: "6"
+platform:
+  - x86
+  - x64
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm config set spin false
+  - npm rebuild
+  - node . install -g .
+  - set "PATH=%APPDATA%\npm;C:\Program Files\Git\mingw64\libexec;%PATH%"
+  - npm install --loglevel=http
+test_script:
+  - node --version
+  - npm --version
+  - npm test
+# GO_FAST
+matrix:
+  fast_finish: true
+# we don't need the builds, we just need tests
+build: off
