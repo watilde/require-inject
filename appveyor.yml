@@ -10,10 +10,7 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - npm config set spin false
-  - npm rebuild
-  - node . install -g .
-  - set "PATH=%APPDATA%\npm;C:\Program Files\Git\mingw64\libexec;%PATH%"
-  - npm install --loglevel=http
+  - npm install
 test_script:
   - node --version
   - npm --version
